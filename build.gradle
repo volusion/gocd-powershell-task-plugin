@@ -18,7 +18,7 @@ apply plugin: 'java'
 apply from: "https://raw.githubusercontent.com/gocd/gocd-plugin-gradle-task-helpers/master/helper.gradle?_=${(int) (new Date().toInstant().epochSecond / 60)}"
 
 group = 'cd.go.contrib.task.powershell'
-version = '0.0.0' // x-release-please-version
+version = '1.0.0' // x-release-please-version
 
 gocdPlugin {
     id            = 'cd.go.contrib.task.powershell'
