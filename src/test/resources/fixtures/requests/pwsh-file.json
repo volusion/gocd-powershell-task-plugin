@@ -1,0 +1,46 @@
+{
+    "config": {
+        "PowerShellVersion": {
+            "secure": false,
+            "value": "pwsh",
+            "required": true
+        },
+        "Mode": {
+            "secure": false,
+            "value": "File",
+            "required": true
+        },
+        "File": {
+            "secure": false,
+            "value": "./src/test/resources/fixtures/scripts/hello-world.ps1",
+            "required": false
+        },
+        "Command": {
+            "secure": false,
+            "value": "",
+            "required": false
+        },
+        "NoProfile": {
+            "secure": false,
+            "value": false,
+            "required": false
+        },
+        "NoLogo": {
+            "secure": false,
+            "value": false,
+            "required": false
+        },
+        "ExecutionPolicy": {
+            "secure": false,
+            "value": "Default",
+            "required": false
+        }
+    },
+    "context": {
+        "workingDirectory": "C:\\Program Files\\Go Agent",
+        "environmentVariables": {
+            "GO_STAGE_NAME": "deploy",
+            "GO_JOB_NAME": "main"
+        }
+    }
+}

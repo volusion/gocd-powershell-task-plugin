@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Gradle: Clean Build",
+            "request": "launch",
+            "program": "gradlew",
+            "args": ["clean", "build"],
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Gradle: Build",
+            "request": "launch",
+            "program": "gradlew",
+            "args": ["build"],
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Gradle: Clean Test",
+            "request": "launch",
+            "program": "gradlew",
+            "args": ["clean", "test"],
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Gradle: Test",
+            "request": "launch",
+            "program": "gradlew",
+            "args": ["test"],
+            "console": "integratedTerminal"
+        }
+    ]
+}

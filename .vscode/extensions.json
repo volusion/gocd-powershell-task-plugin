@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "redhat.java",
+        "sonarsource.sonarlint-vscode",
+        "vscjava.vscode-gradle",
+        "oracle.oracle-java",
+        "editorconfig.editorconfig",
+        "github.vscode-github-actions"
+    ]
+}
