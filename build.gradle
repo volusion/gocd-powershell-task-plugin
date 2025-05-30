@@ -66,7 +66,7 @@ dependencies {
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.13.1' // Updated to latest stable
     implementation group: 'commons-io', name: 'commons-io', version: '2.19.0' // Updated to latest stable
 
-    testImplementation platform('org.junit:junit-bom:5.12.2')
+    testImplementation platform('org.junit:junit-bom:5.13.0')
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine'
