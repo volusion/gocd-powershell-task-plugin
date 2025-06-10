@@ -22,15 +22,16 @@ import java.util.Map;
  * Runtime context for the Process
  */
 public class Context {
-    private final Map environmentVariables;
+    private final Map<String, String> environmentVariables;
     private final String workingDir;
 
     /**
      * Construct a context from a Map (e.g. derived from JSON request)
      * @param context The map containing environment variables and working directory
      */
-    public Context(Map context) {
-        environmentVariables = (Map) context.get("environmentVariables");
+    @SuppressWarnings("unchecked")
+    public Context(Map<String, Object> context) {
+        environmentVariables = (Map<String, String>) context.get("environmentVariables");
         workingDir = (String) context.get("workingDirectory");
     }
 
@@ -38,8 +39,17 @@ public class Context {
      * Gets the environment variables for the context
      * @return Environment variables
      */
-    public Map getEnvironmentVariables() {
+    public Map<String, String> getEnvironmentVariables() {
         return environmentVariables;
+    }
+
+    /**
+     * Get a single environment variable for the context
+     * @param key The environment variable name
+     * @return The environment variable value
+     */
+    public String getEnvironmentVariable(String key) {
+        return environmentVariables.get(key);
     }
 
     /**

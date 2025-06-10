@@ -118,13 +118,16 @@
     </div>
 
     <div class="form_item_block" ng-show="Mode == 'File'">
-        <label for="file">File:</label>
-        <input type="text" id="file" ng-model="File" ng-required="true"/>
+        <label for="file" ng-class="{'is-invalid-label': GOINPUTNAME[File].$error.server}">File:</label>
+        <div style="display: flex;">
+            <select ng-model="FileFromEnv"><option value="false">Literal Var</option><option value="true">Env Var</option></select>
+            <input type="text" id="file" ng-model="File" ng-required="true" ng-class="{'is-invalid-input': GOINPUTNAME[File].$error.server}" />
+        </div>
         <span class="form_error" ng-show="GOINPUTNAME[File].$error.server">{{ GOINPUTNAME[File].$error.server }}</span>
     </div>
 
     <div class="form_item_block" ng-show="Mode == 'Command'">
-        <label for="command">Command:</label>
+        <label for="command" ng-class="{'is-invalid-label': GOINPUTNAME[Command].$error.server}">Command:</label>
         <div id="editor" style="min-height: 26;"></div>
         <textarea id="command" wrap="off" autocomplete="off" ng-model="Command"></textarea>
         <span class="form_error" ng-show="GOINPUTNAME[Command].$error.server">{{ GOINPUTNAME[Command].$error.server }}</span>
@@ -133,11 +136,11 @@
     <div class="form_item_block">
         <label>Additional Options:</label>
         <div class="checkbox_row">
-            <input type="checkbox" id="noprofile" ng-model="NoProfile" ng-init="NoProfile = NoProfile || false" ng-true-value="true" ng-false-value="false"/>
+            <input type="checkbox" id="noprofile" ng-model="NoProfile" ng-init="NoProfile = NoProfile || false" ng-true-value="true" ng-false-value="false" />
             <label for="noprofile">-NoProfile</label>
         </div>
         <div class="checkbox_row">
-            <input type="checkbox" id="nologo" ng-model="NoLogo" ng-init="NoLogo = NoLogo || false" ng-true-value="true" ng-false-value="false"/>
+            <input type="checkbox" id="nologo" ng-model="NoLogo" ng-init="NoLogo = NoLogo || false" ng-true-value="true" ng-false-value="false" />
             <label for="nologo">-NoLogo</label>
         </div>
         <div class="checkbox_row">

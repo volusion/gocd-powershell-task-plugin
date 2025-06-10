@@ -16,20 +16,20 @@
 
 package cd.go.contrib.task.powershell;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.thoughtworks.go.plugin.api.request.DefaultGoPluginApiRequest;
-import com.thoughtworks.go.plugin.api.response.DefaultGoApiResponse;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.EnabledOnOs;
-
 import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
 import static org.junit.jupiter.api.condition.OS.WINDOWS;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.thoughtworks.go.plugin.api.request.DefaultGoPluginApiRequest;
+import com.thoughtworks.go.plugin.api.response.DefaultGoApiResponse;
 
 public class PowerShellTaskExecutorTest {
     @Test
@@ -115,6 +115,27 @@ public class PowerShellTaskExecutorTest {
         assertThat(result.responseCode(), equalTo(DefaultGoApiResponse.SUCCESS_RESPONSE_CODE));
         assertThat(mockConsoleLogger.getPrintLines().size(), equalTo(1));
         assertThat(mockConsoleLogger.getPrintLines().get(0), equalTo("Launching command: [PowerShell.exe, -NonInteractive, -File, ./src/test/resources/fixtures/scripts/hello-world.ps1]"));
+        assertThat(mockConsoleLogger.getStdOut(), containsString("Hello, World!"));
+    }
+
+    @Test
+    void canExecuteFileFromEnv() {
+        PowerShellTaskExecutor executor = new PowerShellTaskExecutor();
+
+        DefaultGoPluginApiRequest request = new DefaultGoPluginApiRequest("task", "1.0", "execute");
+        String pwshCommand = TestUtil.readResource("/fixtures/requests/pwsh-file-from-env.json");
+        request.setRequestBody(pwshCommand);
+
+        Map executionRequest = (Map) new GsonBuilder().create().fromJson(request.requestBody(), Object.class);
+        Map config = (Map) executionRequest.get("config");
+        Map context = (Map) executionRequest.get("context");
+        MockConsoleLogger mockConsoleLogger = new MockConsoleLogger(context);
+
+        Result result = executor.execute(new TaskConfig(config), new Context(context), mockConsoleLogger);
+
+        assertThat(result.responseCode(), equalTo(DefaultGoApiResponse.SUCCESS_RESPONSE_CODE));
+        assertThat(mockConsoleLogger.getPrintLines().size(), equalTo(1));
+        assertThat(mockConsoleLogger.getPrintLines().get(0), equalTo("Launching command: [pwsh, -NonInteractive, -File, ./src/test/resources/fixtures/scripts/hello-world.ps1]"));
         assertThat(mockConsoleLogger.getStdOut(), containsString("Hello, World!"));
     }
 

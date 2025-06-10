@@ -52,26 +52,32 @@ public class GetConfigRequest {
         file.put("required", false);
         config.put(TaskPlugin.FILE_PROPERTY, file);
 
+        HashMap<String, Object> fileFromEnv = new HashMap<>();
+        file.put("display-order", "3");
+        file.put("display-name", "FileFromEnv");
+        file.put("required", false);
+        config.put(TaskPlugin.FILE_FROM_ENV_PROPERTY, fileFromEnv);
+
         HashMap<String, Object> command = new HashMap<>();
-        command.put("display-order", "3");
+        command.put("display-order", "4");
         command.put("display-name", "Command");
         command.put("required", false);
         config.put(TaskPlugin.COMMAND_PROPERTY, command);
 
         HashMap<String, Object> noProfile = new HashMap<>();
-        noProfile.put("display-order", "4");
+        noProfile.put("display-order", "5");
         noProfile.put("display-name", "No Profile");
         noProfile.put("required", false);
         config.put(TaskPlugin.NO_PROFILE_PROPERTY, noProfile);
 
         HashMap<String, Object> noLogo = new HashMap<>();
-        noLogo.put("display-order", "5");
+        noLogo.put("display-order", "6");
         noLogo.put("display-name", "No Logo");
         noLogo.put("required", false);
         config.put(TaskPlugin.NO_LOGO_PROPERTY, noLogo);
 
         HashMap<String, Object> executionPolicy = new HashMap<>();
-        executionPolicy.put("display-order", "6");
+        executionPolicy.put("display-order", "7");
         executionPolicy.put("display-name", "Execution Policy");
         executionPolicy.put("required", false);
         config.put(TaskPlugin.EXECUTION_POLICY_PROPERTY, executionPolicy);

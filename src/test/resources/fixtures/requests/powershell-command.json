@@ -15,6 +15,11 @@
             "value": "",
             "required": false
         },
+        "FileFromEnv": {
+            "secure": false,
+            "value": false,
+            "required": false
+        },
         "Command": {
             "secure": false,
             "value": "Write-Output \"Hello World\"",

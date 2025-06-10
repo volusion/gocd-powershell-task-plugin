@@ -25,6 +25,7 @@ public class TaskConfig {
     private final String exe;
     private final String mode;
     private final String file;
+    private final boolean fileFromEnv;
     private final String command;
     private final boolean noProfile;
     private final boolean noLogo;
@@ -38,6 +39,7 @@ public class TaskConfig {
         exe = getValue(config, TaskPlugin.POWERSHELL_EXE_PROPERTY);
         mode = getValue(config, TaskPlugin.MODE_PROPERTY);
         file = getValue(config, TaskPlugin.FILE_PROPERTY);
+        fileFromEnv = getBooleanValue(config, TaskPlugin.FILE_FROM_ENV_PROPERTY);
         command = getValue(config, TaskPlugin.COMMAND_PROPERTY);
         noProfile = getBooleanValue(config, TaskPlugin.NO_PROFILE_PROPERTY);
         noLogo = getBooleanValue(config, TaskPlugin.NO_LOGO_PROPERTY);
@@ -51,6 +53,12 @@ public class TaskConfig {
      * @return
      */
     private String getValue(Map config, String property) {
+        Map propConfig = (Map) config.get(property);
+
+        if (propConfig == null) {
+            return null;
+        }
+
         return (String) ((Map) config.get(property)).get("value");
     }
 
@@ -61,9 +69,17 @@ public class TaskConfig {
      * @return
      */
     private boolean getBooleanValue(Map config, String property) {
-        Object value = ((Map) config.get(property)).get("value");
+        Map propConfig = (Map) config.get(property);
 
-        if (value instanceof String) {
+        if (propConfig == null) {
+            return false;
+        }
+
+        Object value = (propConfig).get("value");
+
+        if (value == null) {
+            return false;
+        } else if (value instanceof String) {
             return Boolean.parseBoolean((String) value);
         }
 
@@ -124,5 +140,13 @@ public class TaskConfig {
      */
     public String getExecutionPolicy() {
         return executionPolicy;
+    }
+
+    /**
+     * Get whether the PowerShell Task `File` option should expand environment variables
+     * @return true if the `File` option should expand environment variables, false otherwise
+     */
+    public boolean isFileFromEnv() {
+        return fileFromEnv;
     }
 }

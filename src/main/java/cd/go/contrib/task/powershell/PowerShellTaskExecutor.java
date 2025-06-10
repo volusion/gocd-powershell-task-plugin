@@ -22,11 +22,48 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Main PowerShell Task Executor
  */
 public class PowerShellTaskExecutor {
+    private final Map<String, String> envMap = System.getenv();
+
+    private String expandEnvVars(Context taskContext, String text) {
+        Map<String, String> contextEnvMap = taskContext.getEnvironmentVariables();
+
+        String expanded = text;
+        for (Entry<String, String> entry : contextEnvMap.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if (value != null) {
+                expanded = expanded.replaceAll("\\$\\{" + key + "\\}", value);
+            }
+        }
+
+        for (Entry<String, String> entry : envMap.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if (value != null) {
+                expanded = expanded.replaceAll("\\$\\{" + key + "\\}", value);
+            }
+        }
+
+        // If no replacements have been made, attempt to see if the entire text string is an env var
+        if (text.equals(expanded)) {
+            String contextEnvVar = taskContext.getEnvironmentVariable(text);
+
+            if (contextEnvVar != null && !contextEnvVar.isEmpty())
+                expanded = contextEnvVar;
+            else {
+                expanded = System.getenv(text);
+            }
+        }
+
+        return expanded;
+    }
 
     /**
      * Execution handler
@@ -111,7 +148,7 @@ public class PowerShellTaskExecutor {
 
         if (taskConfig.getMode().equals("File")) {
             command.add("-File");
-            command.add(taskConfig.getFile());
+            command.add(taskConfig.isFileFromEnv() ? expandEnvVars(taskContext, taskConfig.getFile()) : taskConfig.getFile());
         } else if (taskConfig.getMode().equals("Command")) {
             command.add("-Command");
             command.add("-");

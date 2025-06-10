@@ -15,6 +15,11 @@
             "value": "./src/test/resources/fixtures/scripts/hello-world.ps1",
             "required": false
         },
+        "FileFromEnv": {
+            "secure": false,
+            "value": false,
+            "required": false
+        },
         "Command": {
             "secure": false,
             "value": "",

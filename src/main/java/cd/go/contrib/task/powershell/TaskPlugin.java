@@ -57,6 +57,11 @@ public class TaskPlugin implements GoPlugin {
     public static final String FILE_PROPERTY = "File";
 
     /**
+     * Property name for the PowerShell `File` task configuration.
+     */
+    public static final String FILE_FROM_ENV_PROPERTY = "FileFromEnv";
+
+    /**
      * Property name for the PowerShell `Command` task configuration.
      */
     public static final String COMMAND_PROPERTY = "Command";
