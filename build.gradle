@@ -24,7 +24,7 @@ gocdPlugin {
     id            = 'cd.go.contrib.task.powershell'
     version       = project.version
     pluginVersion = project.version
-    goCdVersion   = '21.2.0'
+    goCdVersion   = '25.4.0'
     name          = 'Powershell Task Plugin'
     description   = 'GoCD task plugin to run PowerShell scripts.'
     vendorName    = 'Volusion'
@@ -48,13 +48,13 @@ repositories {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_15
-    targetCompatibility = JavaVersion.VERSION_15
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 ext {
     deps = [
-        gocdPluginApi: 'cd.go.plugin:go-plugin-api:25.3.0',
+        gocdPluginApi: 'cd.go.plugin:go-plugin-api:25.4.0',
     ]
 
     versions = project.ext.deps.collectEntries { lib, libGav -> [lib, libGav.split(':').last()] }
