@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/volusion/gocd-powershell-task-plugin/compare/v1.1.0...v2.0.0) (2026-07-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* Upgrading Java Version ([#33](https://github.com/volusion/gocd-powershell-task-plugin/issues/33))
+
+### Features
+
+* Upgrading Java Version ([#33](https://github.com/volusion/gocd-powershell-task-plugin/issues/33)) ([72290da](https://github.com/volusion/gocd-powershell-task-plugin/commit/72290dadd910897e46f1499d12724e0b6560b62a))
+
 ## [1.1.0](https://github.com/volusion/gocd-powershell-task-plugin/compare/v1.0.0...v1.1.0) (2025-06-10)
 
 
